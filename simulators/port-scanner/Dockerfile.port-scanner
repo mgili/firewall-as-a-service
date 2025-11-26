@@ -1,0 +1,8 @@
+FROM ubuntu:latest
+
+RUN apt-get update && apt-get upgrade -y && apt-get install -y nmap
+
+COPY nmap.sh /usr/local/bin/nmap.sh
+RUN chmod +x /usr/local/bin/nmap.sh
+
+ENTRYPOINT ["/usr/local/bin/nmap.sh"]

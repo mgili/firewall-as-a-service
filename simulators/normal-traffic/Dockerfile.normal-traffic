@@ -1,0 +1,8 @@
+FROM ubuntu:latest
+
+RUN apt-get update && apt-get upgrade -y && apt-get install -y curl
+
+COPY curl.sh /usr/local/bin/curl.sh
+RUN chmod +x /usr/local/bin/curl.sh
+
+ENTRYPOINT ["/usr/local/bin/curl.sh"]

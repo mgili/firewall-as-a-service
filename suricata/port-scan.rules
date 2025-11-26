@@ -1,0 +1,8 @@
+# Port scan
+alert tcp any any -> any any (msg:"Possible Port Scan Detected"; flags:S; threshold: type both, track by_src, count 5, seconds 60; sid:1000001; rev:1;)
+
+# TCP NULL scan 
+alert tcp any any -> any any (msg:"TCP NULL Scan Detected"; flags:0; threshold: type both, track by_src, count 3, seconds 30; sid:1000007; rev:1;)
+
+# HTTP flood detection
+alert http any any -> any any (msg:"HTTP Flood Detected"; threshold: type both, track by_src, count 20, seconds 10; sid:1000010; rev:1;)

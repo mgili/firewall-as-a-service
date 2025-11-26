@@ -1,0 +1,17 @@
+FROM ubuntu:latest
+
+RUN apt-get update && apt-get install -y suricata netcat-openbsd python3 python3-pip python3-websockets python3-watchdog
+
+COPY suricata.yaml /etc/suricata/suricata.yaml
+COPY port-scan.rules /etc/suricata/rules/port-scan.rules
+
+COPY blacklist_daemon.py /usr/local/bin/blacklist_daemon.py
+COPY websocket_server.py /usr/local/bin/websocket_server.py
+RUN chmod +x /usr/local/bin/blacklist_daemon.py /usr/local/bin/websocket_server.py
+
+COPY suricata_setup.sh /setup.sh
+RUN chmod +x /setup.sh
+
+EXPOSE 9191 9192
+
+ENTRYPOINT ["/setup.sh"]
